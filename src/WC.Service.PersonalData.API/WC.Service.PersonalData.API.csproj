@@ -23,9 +23,9 @@
     <PackageReference Include="WC.Library.Web" Version="1.0.25"/>
   </ItemGroup>
 
-    <ItemGroup>
-      <ProjectReference Include="..\WC.Service.PersonalData.Domain.Abstractions\WC.Service.PersonalData.Domain.Abstractions.csproj" />
-      <ProjectReference Include="..\WC.Service.PersonalData.Domain\WC.Service.PersonalData.Domain.csproj" />
-    </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\WC.Service.PersonalData.Domain.Abstractions\WC.Service.PersonalData.Domain.Abstractions.csproj"/>
+    <ProjectReference Include="..\WC.Service.PersonalData.Domain\WC.Service.PersonalData.Domain.csproj"/>
+  </ItemGroup>
 
 </Project>
