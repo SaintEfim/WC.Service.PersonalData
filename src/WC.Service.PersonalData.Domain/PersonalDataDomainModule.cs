@@ -1,5 +1,6 @@
 ﻿using Autofac;
 using FluentValidation;
+using WC.Library.BCryptPasswordHash;
 using WC.Library.Domain.Services;
 using WC.Service.PersonalData.Data.PostgreSql;
 
@@ -11,6 +12,7 @@ public class PersonalDataDomainModule : Module
         ContainerBuilder builder)
     {
         builder.RegisterModule<PersonalDataDataPostgreSqlModule>();
+        builder.RegisterModule<WcLibraryBCryptPasswordHasher>();
 
         builder.RegisterAssemblyTypes(ThisAssembly)
             .AsClosedTypesOf(typeof(IDataProvider<>))

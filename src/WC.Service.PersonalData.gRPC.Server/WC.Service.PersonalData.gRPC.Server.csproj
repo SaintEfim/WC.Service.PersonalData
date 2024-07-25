@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <RootNamespace>WC.Service.EmailDomains.gRPC.Server</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="logs\"/>
+    <Folder Include="obj\Debug\net8.0\Protos\"/>
+    <Protobuf Include="Protos\greet_personal_data.proto" GrpcServices="Server"/>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Google.Protobuf" Version="3.27.2" />
+    <PackageReference Include="Grpc.AspNetCore" Version="2.64.0"/>
+    <PackageReference Include="WC.Library.Web" Version="1.0.25"/>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\WC.Service.PersonalData.Domain\WC.Service.PersonalData.Domain.csproj"/>
+  </ItemGroup>
+
+</Project>

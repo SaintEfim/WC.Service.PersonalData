@@ -1,0 +1,31 @@
+syntax = "proto3";
+
+option csharp_namespace = "WC.Service.PersonalData.gRPC.Server.Services";
+
+package personal_data;
+
+service GreeterPersonalData {
+  rpc Create (PersonalDataCreateRequest) returns (PersonalDataCreateResponse);
+  rpc CheckEmailAndPasswordExistence (EmailAndPasswordExistenceRequest) returns (EmailAndPasswordExistenceResponse);
+}
+
+message PersonalData {
+  string email = 1;
+  string password = 2;
+}
+
+message PersonalDataCreateRequest {
+  PersonalData personalData = 1;
+}
+
+message PersonalDataCreateResponse {
+  string Id = 1;
+}
+
+message EmailAndPasswordExistenceRequest {
+  PersonalData personalData = 1;
+}
+
+message EmailAndPasswordExistenceResponse {
+  bool doesExist = 1;
+}
