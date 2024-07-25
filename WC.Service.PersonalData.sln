@@ -20,6 +20,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WC.Service.PersonalData.API
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WC.Service.PersonalData.gRPC.Server", "src\WC.Service.PersonalData.gRPC.Server\WC.Service.PersonalData.gRPC.Server.csproj", "{45F92D29-AC42-4F55-9321-5995DCDFA66F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WC.Service.PersonalData.gRPC.Client.Abstractions", "src\WC.Service.PersonalData.gRPC.Client.Abstractions\WC.Service.PersonalData.gRPC.Client.Abstractions.csproj", "{08A02F1B-F78D-4679-AC24-5DB407BAF649}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WC.Service.PersonalData.gRPC.Client", "src\WC.Service.PersonalData.gRPC.Client\WC.Service.PersonalData.gRPC.Client.csproj", "{DA02F4A0-2BCD-4EEB-9E4A-FE1FA9F2DF01}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -54,5 +58,13 @@ Global
 		{45F92D29-AC42-4F55-9321-5995DCDFA66F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{45F92D29-AC42-4F55-9321-5995DCDFA66F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{45F92D29-AC42-4F55-9321-5995DCDFA66F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{08A02F1B-F78D-4679-AC24-5DB407BAF649}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{08A02F1B-F78D-4679-AC24-5DB407BAF649}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{08A02F1B-F78D-4679-AC24-5DB407BAF649}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{08A02F1B-F78D-4679-AC24-5DB407BAF649}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DA02F4A0-2BCD-4EEB-9E4A-FE1FA9F2DF01}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DA02F4A0-2BCD-4EEB-9E4A-FE1FA9F2DF01}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DA02F4A0-2BCD-4EEB-9E4A-FE1FA9F2DF01}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DA02F4A0-2BCD-4EEB-9E4A-FE1FA9F2DF01}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
