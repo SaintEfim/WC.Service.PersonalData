@@ -5,8 +5,17 @@ option csharp_namespace = "WC.Service.PersonalData.gRPC.Server.Services";
 package personal_data;
 
 service GreeterPersonalData {
-  rpc Create (PersonalDataCreateRequest) returns (PersonalDataCreateResponse);
-  rpc VerifyEmployeeCredentials (VerifyEmployeeCredentialsRequest) returns (VerifyEmployeeCredentialsResponse);
+  rpc CreateEmployeeWithPersonalData (CreateEmployeeWithPersonalDataRequest) returns (CreateEmployeeWithPersonalDataResponse);
+  rpc VerifyCredentials (VerifyCredentialsRequest) returns (ExistResponse);
+  rpc DoesEmailExist (DoesEmailExistRequest) returns (ExistResponse);
+}
+
+message Employee {
+  string name = 2;
+  string surname = 3;
+  string patronymic = 4;
+  string positionId = 5;
+  string role = 6;
 }
 
 message PersonalData {
@@ -14,20 +23,25 @@ message PersonalData {
   string password = 2;
 }
 
-message PersonalDataCreateRequest {
-  PersonalData personalData = 1;
+message CreateEmployeeWithPersonalDataRequest {
+  Employee employee = 1;
+  PersonalData personalData = 2;
 }
 
-message PersonalDataCreateResponse {
-  string PersonalDataId = 1;
+message CreateEmployeeWithPersonalDataResponse {
+  string EmployeeId = 1;
 }
 
-message VerifyEmployeeCredentialsRequest {
-  string PersonalDataId = 1;
+message VerifyCredentialsRequest {
   string email = 2;
   string password = 3;
 }
 
-message VerifyEmployeeCredentialsResponse {
+message DoesEmailExistRequest {
+  string email = 1;
+}
+
+message ExistResponse {
   bool exist = 1;
 }
+

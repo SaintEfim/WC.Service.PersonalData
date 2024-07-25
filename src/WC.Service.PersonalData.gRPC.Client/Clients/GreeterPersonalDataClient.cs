@@ -1,7 +1,6 @@
 ﻿using Grpc.Net.Client;
 using WC.Library.Domain.Models;
 using WC.Service.PersonalData.gRPC.Client.Models;
-using WC.Service.PersonalData.gRPC.Client.Models.Verify;
 
 namespace WC.Service.PersonalData.gRPC.Client.Clients;
 
@@ -17,12 +16,20 @@ public class GreeterPersonalDataClient : IGreeterPersonalDataClient
     }
 
     public async Task<CreateResultModel> Create(
-        PersonalDataCreateRequestModel request,
+        CreateEmployeeWithPersonalDataRequestModel request,
         CancellationToken cancellationToken = default)
     {
-        var createResult = await _client.CreateAsync(
-            new PersonalDataCreateRequest
+        var createResult = await _client.CreateEmployeeWithPersonalDataAsync(
+            new CreateEmployeeWithPersonalDataRequest
             {
+                Employee = new Employee
+                {
+                    Name = request.Name,
+                    Surname = request.Surname,
+                    Patronymic = request.Patronymic,
+                    PositionId = request.PositionId.ToString(),
+                    Role = request.Role
+                },
                 PersonalData = new PersonalData
                 {
                     Email = request.Email,
@@ -30,21 +37,20 @@ public class GreeterPersonalDataClient : IGreeterPersonalDataClient
                 }
             }, cancellationToken: cancellationToken);
 
-        return new CreateResultModel { Id = Guid.Parse(createResult.PersonalDataId) };
+        return new CreateResultModel { Id = Guid.Parse(createResult.EmployeeId) };
     }
 
-    public async Task<VerifyEmployeeCredentialsResponseModel> VerifyEmployeeCredentials(
-        VerifyEmployeeCredentialsRequestModel request,
+    public async Task<ExistResponseModel> VerifyCredentials(
+        VerifyCredentialsRequestModel request,
         CancellationToken cancellationToken = default)
     {
-        var verifyResult = await _client.VerifyEmployeeCredentialsAsync(
-            new VerifyEmployeeCredentialsRequest
+        var verifyResult = await _client.VerifyCredentialsAsync(
+            new VerifyCredentialsRequest
             {
-                PersonalDataId = request.PersonalDataId.ToString(),
                 Email = request.Email,
                 Password = request.Password
             }, cancellationToken: cancellationToken);
 
-        return new VerifyEmployeeCredentialsResponseModel { Exists = verifyResult.Exist };
+        return new ExistResponseModel { Exists = verifyResult.Exist };
     }
 }

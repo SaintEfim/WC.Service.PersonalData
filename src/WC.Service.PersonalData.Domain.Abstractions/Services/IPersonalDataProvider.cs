@@ -8,4 +8,8 @@ public interface IPersonalDataProvider : IDataProvider<PersonalDataModel>
     Task<bool> DoesEmailAndPasswordExist(
         PersonalDataModel model,
         CancellationToken cancellationToken = default);
+
+    Task<bool> DoesEmailExist(
+        string email,
+        CancellationToken cancellationToken = default);
 }

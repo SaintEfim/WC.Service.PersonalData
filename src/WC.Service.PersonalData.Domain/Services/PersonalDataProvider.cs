@@ -30,9 +30,16 @@ public class PersonalDataProvider
     {
         var personalDataEntities = await Repository.Get(cancellationToken: cancellationToken);
         var personalData = personalDataEntities.SingleOrDefault(x =>
-            _passwordHasher.Verify(x.Email, model.Email) && _passwordHasher.Verify(x.Password, model.Password) &&
-            x.Id == model.Id);
+            _passwordHasher.Verify(x.Email, model.Email) && _passwordHasher.Verify(x.Password, model.Password));
 
         return personalData != null;
+    }
+
+    public async Task<bool> DoesEmailExist(
+        string email,
+        CancellationToken cancellationToken = default)
+    {
+        var employees = await Repository.Get(cancellationToken: cancellationToken);
+        return employees.Any(x => x.Email == email);
     }
 }

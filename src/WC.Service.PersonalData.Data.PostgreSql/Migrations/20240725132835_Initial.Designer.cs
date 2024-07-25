@@ -12,7 +12,7 @@ using WC.Service.PersonalData.Data.PostgreSql.Context;
 namespace WC.Service.PersonalData.Data.PostgreSql.Migrations
 {
     [DbContext(typeof(PersonalDataDbContext))]
-    [Migration("20240723132018_Initial")]
+    [Migration("20240725132835_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -34,6 +34,9 @@ namespace WC.Service.PersonalData.Data.PostgreSql.Migrations
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasColumnType("text");
+
+                    b.Property<Guid>("EmployeeId")
+                        .HasColumnType("uuid");
 
                     b.Property<string>("Password")
                         .IsRequired()
