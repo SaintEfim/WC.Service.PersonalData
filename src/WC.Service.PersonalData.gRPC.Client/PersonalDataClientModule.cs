@@ -3,7 +3,7 @@ using WC.Service.PersonalData.gRPC.Client.Clients;
 
 namespace WC.Service.PersonalData.gRPC.Client;
 
-public class AuthenticationClientModule : Module
+public class PersonalDataClientModule : Module
 {
     protected override void Load(
         ContainerBuilder builder)
