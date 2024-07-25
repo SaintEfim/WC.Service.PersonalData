@@ -30,7 +30,7 @@ public class GreeterPersonalDataClient : IGreeterPersonalDataClient
                 }
             }, cancellationToken: cancellationToken);
 
-        return new CreateResultModel { Id = Guid.Parse(createResult.Id) };
+        return new CreateResultModel { Id = Guid.Parse(createResult.PersonalDataId) };
     }
 
     public async Task<VerifyEmployeeCredentialsResponseModel> VerifyEmployeeCredentials(
@@ -40,11 +40,9 @@ public class GreeterPersonalDataClient : IGreeterPersonalDataClient
         var verifyResult = await _client.VerifyEmployeeCredentialsAsync(
             new VerifyEmployeeCredentialsRequest
             {
-                PersonalData = new PersonalData
-                {
-                    Email = request.Email,
-                    Password = request.Password
-                }
+                PersonalDataId = request.PersonalDataId.ToString(),
+                Email = request.Email,
+                Password = request.Password
             }, cancellationToken: cancellationToken);
 
         return new VerifyEmployeeCredentialsResponseModel { Exists = verifyResult.Exist };

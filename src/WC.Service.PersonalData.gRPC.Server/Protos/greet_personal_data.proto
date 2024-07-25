@@ -19,11 +19,13 @@ message PersonalDataCreateRequest {
 }
 
 message PersonalDataCreateResponse {
-  string Id = 1;
+  string PersonalDataId = 1;
 }
 
 message VerifyEmployeeCredentialsRequest {
-  PersonalData personalData = 1;
+  string PersonalDataId = 1;
+  string email = 2;
+  string password = 3;
 }
 
 message VerifyEmployeeCredentialsResponse {

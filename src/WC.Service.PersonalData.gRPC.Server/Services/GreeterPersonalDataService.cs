@@ -28,7 +28,7 @@ public class GreeterPersonalDataService : GreeterPersonalData.GreeterPersonalDat
             Password = request.PersonalData.Password
         }, context.CancellationToken);
 
-        return new PersonalDataCreateResponse { Id = createItem.Id.ToString() };
+        return new PersonalDataCreateResponse { PersonalDataId = createItem.Id.ToString() };
     }
 
     public override async Task<VerifyEmployeeCredentialsResponse> VerifyEmployeeCredentials(
@@ -38,8 +38,9 @@ public class GreeterPersonalDataService : GreeterPersonalData.GreeterPersonalDat
         var result = await _provider.DoesEmailAndPasswordExist(
             new PersonalDataModel
             {
-                Email = request.PersonalData.Email,
-                Password = request.PersonalData.Password
+                Id = Guid.Parse(request.PersonalDataId),
+                Email = request.Email,
+                Password = request.Password
             }, context.CancellationToken);
 
         return new VerifyEmployeeCredentialsResponse { Exist = result };
