@@ -24,7 +24,7 @@ public class PersonalDataProvider
         _passwordHasher = passwordHasher;
     }
 
-    public async Task<bool> DoesEmailAndPasswordExist(
+    public async Task<PersonalDataModel> VerifyEmailAndPassword(
         PersonalDataModel model,
         CancellationToken cancellationToken = default)
     {
@@ -32,14 +32,6 @@ public class PersonalDataProvider
         var personalData = personalDataEntities.SingleOrDefault(x =>
             _passwordHasher.Verify(x.Email, model.Email) && _passwordHasher.Verify(x.Password, model.Password));
 
-        return personalData != null;
-    }
-
-    public async Task<bool> DoesEmailExist(
-        string email,
-        CancellationToken cancellationToken = default)
-    {
-        var employees = await Repository.Get(cancellationToken: cancellationToken);
-        return employees.Any(x => x.Email == email);
+        return Mapper.Map<PersonalDataModel>(personalData);
     }
 }

@@ -1,9 +1,7 @@
-﻿namespace WC.Service.PersonalData.gRPC.Client.Models;
+﻿namespace WC.Service.PersonalData.gRPC.Client.Models.Verify;
 
 public class VerifyCredentialsRequestModel
 {
-    public required Guid PersonalDataId { get; set; }
-
     public required string Email { get; set; }
 
     public required string Password { get; set; }
