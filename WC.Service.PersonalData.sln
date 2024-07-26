@@ -16,7 +16,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WC.Service.PersonalData.Dom
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WC.Service.PersonalData.Domain.Abstractions", "src\WC.Service.PersonalData.Domain.Abstractions\WC.Service.PersonalData.Domain.Abstractions.csproj", "{BF3DFB3A-117D-4916-85FD-EEE5E9ABC17C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WC.Service.PersonalData.API", "src\WC.Service.PersonalData.API\WC.Service.PersonalData.API.csproj", "{7F398655-4A3A-4AE2-89B5-5EF651C6D958}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WC.Service.PersonalData.gRPC.Server", "src\WC.Service.PersonalData.gRPC.Server\WC.Service.PersonalData.gRPC.Server.csproj", "{45F92D29-AC42-4F55-9321-5995DCDFA66F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WC.Service.PersonalData.gRPC.Client.Abstractions", "src\WC.Service.PersonalData.gRPC.Client.Abstractions\WC.Service.PersonalData.gRPC.Client.Abstractions.csproj", "{08A02F1B-F78D-4679-AC24-5DB407BAF649}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WC.Service.PersonalData.gRPC.Client", "src\WC.Service.PersonalData.gRPC.Client\WC.Service.PersonalData.gRPC.Client.csproj", "{DA02F4A0-2BCD-4EEB-9E4A-FE1FA9F2DF01}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -44,9 +48,17 @@ Global
 		{BF3DFB3A-117D-4916-85FD-EEE5E9ABC17C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BF3DFB3A-117D-4916-85FD-EEE5E9ABC17C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BF3DFB3A-117D-4916-85FD-EEE5E9ABC17C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{7F398655-4A3A-4AE2-89B5-5EF651C6D958}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{7F398655-4A3A-4AE2-89B5-5EF651C6D958}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{7F398655-4A3A-4AE2-89B5-5EF651C6D958}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{7F398655-4A3A-4AE2-89B5-5EF651C6D958}.Release|Any CPU.Build.0 = Release|Any CPU
+		{45F92D29-AC42-4F55-9321-5995DCDFA66F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{45F92D29-AC42-4F55-9321-5995DCDFA66F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{45F92D29-AC42-4F55-9321-5995DCDFA66F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{45F92D29-AC42-4F55-9321-5995DCDFA66F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{08A02F1B-F78D-4679-AC24-5DB407BAF649}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{08A02F1B-F78D-4679-AC24-5DB407BAF649}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{08A02F1B-F78D-4679-AC24-5DB407BAF649}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{08A02F1B-F78D-4679-AC24-5DB407BAF649}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DA02F4A0-2BCD-4EEB-9E4A-FE1FA9F2DF01}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DA02F4A0-2BCD-4EEB-9E4A-FE1FA9F2DF01}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DA02F4A0-2BCD-4EEB-9E4A-FE1FA9F2DF01}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DA02F4A0-2BCD-4EEB-9E4A-FE1FA9F2DF01}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

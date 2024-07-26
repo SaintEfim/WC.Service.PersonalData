@@ -3,4 +3,9 @@ using WC.Service.PersonalData.Domain.Models;
 
 namespace WC.Service.PersonalData.Domain.Services;
 
-public interface IPersonalDataProvider : IDataProvider<PersonalDataModel>;
+public interface IPersonalDataProvider : IDataProvider<PersonalDataModel>
+{
+    Task<PersonalDataModel> VerifyEmailAndPassword(
+        PersonalDataModel model,
+        CancellationToken cancellationToken = default);
+}

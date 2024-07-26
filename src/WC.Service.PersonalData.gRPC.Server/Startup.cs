@@ -1,10 +1,11 @@
 ﻿using Autofac;
+using WC.Library.Web.Startup;
+using WC.Service.EmailDomains.gRPC.Server.Services;
 using WC.Service.PersonalData.Domain;
-using StartupBase = WC.Library.Web.Startup.StartupBase;
 
-namespace WC.Service.PersonalData.API;
+namespace WC.Service.EmailDomains.gRPC.Server;
 
-internal sealed class Startup : StartupBase
+internal sealed class Startup : StartupGrpcBase
 {
     public Startup(
         WebApplicationBuilder builder)
@@ -17,5 +18,12 @@ internal sealed class Startup : StartupBase
     {
         base.ConfigureContainer(builder);
         builder.RegisterModule<PersonalDataDomainModule>();
+    }
+
+    public override void Configure(
+        WebApplication app)
+    {
+        base.Configure(app);
+        app.MapGrpcService<GreeterPersonalDataService>();
     }
 }

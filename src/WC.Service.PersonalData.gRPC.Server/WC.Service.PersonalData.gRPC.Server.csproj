@@ -4,18 +4,18 @@
     <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-  </PropertyGroup>
-
-  <PropertyGroup>
-    <DocumentationFile>WC.Service.PersonalData.API.xml</DocumentationFile>
-  </PropertyGroup>
-
-  <PropertyGroup>
-    <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <NoWarn>$(NoWarn);1591</NoWarn>
+    <RootNamespace>WC.Service.EmailDomains.gRPC.Server</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
+    <Folder Include="logs\"/>
+    <Folder Include="obj\Debug\net8.0\Protos\"/>
+    <Protobuf Include="Protos\greet_personal_data.proto" GrpcServices="Server"/>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Google.Protobuf" Version="3.27.2"/>
+    <PackageReference Include="Grpc.AspNetCore" Version="2.64.0"/>
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.7">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -24,7 +24,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\WC.Service.PersonalData.Domain.Abstractions\WC.Service.PersonalData.Domain.Abstractions.csproj"/>
     <ProjectReference Include="..\WC.Service.PersonalData.Domain\WC.Service.PersonalData.Domain.csproj"/>
   </ItemGroup>
 

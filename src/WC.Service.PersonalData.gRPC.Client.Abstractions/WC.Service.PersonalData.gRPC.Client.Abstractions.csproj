@@ -4,11 +4,13 @@
     <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
-    <RootNamespace>WC.Service.PersonalData.Domain</RootNamespace>
+    <RootNamespace>WC.Service.PersonalData.gRPC.Client</RootNamespace>
+    <PackageId>WC.Service.PersonalData.gRPC.Client.Abstractions</PackageId>
+    <Version>1.0.5</Version>
+    <Authors>SaintEfim</Authors>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="WC.Library.BCryptPasswordHash.Abstactions" Version="1.0.1"/>
     <PackageReference Include="WC.Library.Domain.Abstractions" Version="1.0.8"/>
   </ItemGroup>
 

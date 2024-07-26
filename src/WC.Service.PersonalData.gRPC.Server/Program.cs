@@ -1,4 +1,4 @@
 using WC.Library.Web.Bootstrap;
-using WC.Service.PersonalData.API;
+using WC.Service.EmailDomains.gRPC.Server;
 
 await Program<Startup>.Main(args);
