@@ -32,6 +32,7 @@ public class GreeterPersonalDataService : GreeterPersonalData.GreeterPersonalDat
             {
                 Name = request.Employee.Name,
                 Surname = request.Employee.Surname,
+                Patronymic = request.Employee.Patronymic,
                 PositionId = Guid.Parse(request.Employee.PositionId)
             }, context.CancellationToken);
 

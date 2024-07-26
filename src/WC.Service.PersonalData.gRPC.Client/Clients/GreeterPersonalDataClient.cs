@@ -27,8 +27,7 @@ public class GreeterPersonalDataClient : IGreeterPersonalDataClient
                     Name = request.Name,
                     Surname = request.Surname,
                     Patronymic = request.Patronymic,
-                    PositionId = request.PositionId.ToString(),
-                    Role = request.Role
+                    PositionId = request.PositionId.ToString()
                 },
                 PersonalData = new PersonalData
                 {

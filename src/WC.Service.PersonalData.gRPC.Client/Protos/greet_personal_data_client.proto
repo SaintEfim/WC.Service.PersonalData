@@ -15,7 +15,6 @@ message Employee {
   string surname = 2;
   string patronymic = 3;
   string positionId = 4;
-  string role = 5;
 }
 
 message PersonalData {
