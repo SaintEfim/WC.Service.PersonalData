@@ -1,4 +1,5 @@
 ﻿using Grpc.Net.Client;
+using WC.Service.PersonalData.gRPC.Client.Models;
 using WC.Service.PersonalData.gRPC.Client.Models.Create;
 using WC.Service.PersonalData.gRPC.Client.Models.Verify;
 
@@ -27,7 +28,28 @@ public class GreeterPersonalDataClient : IGreeterPersonalDataClient
                 Password = request.Password
             }, cancellationToken: cancellationToken);
 
-        return new PersonalDataCreateResponseModel { PersonalDataId = Guid.Parse(createResult.PersonalDataId) };
+        return new PersonalDataCreateResponseModel { PersonalDataId = Guid.Parse(createResult.Id) };
+    }
+
+    public async Task Update(
+        PersonalDataUpdateRequestModel request,
+        CancellationToken cancellationToken = default)
+    {
+        await _client.UpdateAsync(new PersonalDataUpdateRequest
+        {
+            Id = request.Id.ToString(),
+            Email = request.Email,
+            Password = request.Password,
+            Role = request.Role
+        }, cancellationToken: cancellationToken);
+    }
+
+    public async Task Delete(
+        PersonalDataDeleteRequestModel request,
+        CancellationToken cancellationToken = default)
+    {
+        await _client.DeleteAsync(new PersonalDataDeleteRequest { Id = request.Id.ToString() },
+            cancellationToken: cancellationToken);
     }
 
     public async Task<VerifyCredentialsResponseModel> VerifyCredentials(

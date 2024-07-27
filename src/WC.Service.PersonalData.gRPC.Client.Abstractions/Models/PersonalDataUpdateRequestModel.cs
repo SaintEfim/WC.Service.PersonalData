@@ -1,10 +1,8 @@
-﻿using WC.Library.Domain.Models;
+﻿namespace WC.Service.PersonalData.gRPC.Client.Models;
 
-namespace WC.Service.PersonalData.Domain.Models;
-
-public class PersonalDataModel : ModelBase
+public class PersonalDataUpdateRequestModel
 {
-    public Guid EmployeeId { get; set; }
+    public required Guid Id { get; set; }
 
     public string Email { get; set; } = string.Empty;
 

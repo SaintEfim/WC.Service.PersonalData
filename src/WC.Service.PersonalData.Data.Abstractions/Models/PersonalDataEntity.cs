@@ -10,5 +10,5 @@ public class PersonalDataEntity : EntityBase
 
     public required string Password { get; set; }
 
-    public required string Role { get; set; } = "User";
+    public required string Role { get; set; }
 }

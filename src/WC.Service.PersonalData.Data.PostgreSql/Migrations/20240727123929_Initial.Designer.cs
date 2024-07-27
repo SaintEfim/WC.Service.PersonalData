@@ -12,7 +12,7 @@ using WC.Service.PersonalData.Data.PostgreSql.Context;
 namespace WC.Service.PersonalData.Data.PostgreSql.Migrations
 {
     [DbContext(typeof(PersonalDataDbContext))]
-    [Migration("20240726111857_Initial")]
+    [Migration("20240727123929_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
