@@ -1,3 +1,4 @@
+using Google.Protobuf.WellKnownTypes;
 using Grpc.Core;
 using WC.Service.PersonalData.Domain.Models;
 using WC.Service.PersonalData.Domain.Services;
@@ -26,11 +27,34 @@ public class GreeterPersonalDataService : GreeterPersonalData.GreeterPersonalDat
         {
             EmployeeId = Guid.Parse(request.EmployeeId),
             Email = request.Email,
-            Password = request.Password,
-            Role = "User"
+            Password = request.Password
         }, context.CancellationToken);
 
-        return new PersonalDataCreateResponse { PersonalDataId = createItem.Id.ToString() };
+        return new PersonalDataCreateResponse { Id = createItem.Id.ToString() };
+    }
+
+    public override async Task<Empty> Update(
+        PersonalDataUpdateRequest request,
+        ServerCallContext context)
+    {
+        await _manager.Update(new PersonalDataModel
+        {
+            Id = Guid.Parse(request.Id),
+            Email = request.Email,
+            Password = request.Password,
+            Role = request.Role
+        }, context.CancellationToken);
+
+        return new Empty();
+    }
+
+    public override async Task<Empty> Delete(
+        PersonalDataDeleteRequest request,
+        ServerCallContext context)
+    {
+        await _manager.Delete(Guid.Parse(request.Id), context.CancellationToken);
+
+        return new Empty();
     }
 
     public override async Task<VerifyCredentialsResponse> VerifyCredentials(
@@ -39,10 +63,8 @@ public class GreeterPersonalDataService : GreeterPersonalData.GreeterPersonalDat
     {
         var resultVerify = await _provider.VerifyEmailAndPassword(new PersonalDataModel
         {
-            EmployeeId = default,
             Email = request.Email,
-            Password = request.Password,
-            Role = "User"
+            Password = request.Password
         }, context.CancellationToken);
 
         return new VerifyCredentialsResponse

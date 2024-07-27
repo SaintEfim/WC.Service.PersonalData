@@ -9,6 +9,8 @@ public class AutoMapperProfile : Profile
     public AutoMapperProfile()
     {
         CreateMap<PersonalDataModel, PersonalDataEntity>()
-            .ReverseMap();
+            .ForMember(dest => dest.Role, opt => opt.NullSubstitute("User"));
+
+        CreateMap<PersonalDataEntity, PersonalDataModel>();
     }
 }
