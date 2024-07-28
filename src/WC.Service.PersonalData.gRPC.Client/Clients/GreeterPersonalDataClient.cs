@@ -28,19 +28,17 @@ public class GreeterPersonalDataClient : IGreeterPersonalDataClient
                 Password = request.Password
             }, cancellationToken: cancellationToken);
 
-        return new PersonalDataCreateResponseModel { PersonalDataId = Guid.Parse(createResult.Id) };
+        return new PersonalDataCreateResponseModel { PersonalDataId = Guid.Parse(createResult.PersonalDataId) };
     }
 
-    public async Task Update(
-        PersonalDataUpdateRequestModel request,
+    public async Task ResetPassword(
+        PersonalDataResetPasswordRequestModel request,
         CancellationToken cancellationToken = default)
     {
-        await _client.UpdateAsync(new PersonalDataUpdateRequest
+        await _client.ResetPasswordAsync(new PersonalDataResetPasswordRequest
         {
             Id = request.Id.ToString(),
-            Email = request.Email,
-            Password = request.Password,
-            Role = request.Role
+            Password = request.Password
         }, cancellationToken: cancellationToken);
     }
 
@@ -48,7 +46,7 @@ public class GreeterPersonalDataClient : IGreeterPersonalDataClient
         PersonalDataDeleteRequestModel request,
         CancellationToken cancellationToken = default)
     {
-        await _client.DeleteAsync(new PersonalDataDeleteRequest { Id = request.Id.ToString() },
+        await _client.DeleteAsync(new PersonalDataDeleteRequest { PersonalDataId = request.Id.ToString() },
             cancellationToken: cancellationToken);
     }
 
@@ -64,7 +62,7 @@ public class GreeterPersonalDataClient : IGreeterPersonalDataClient
 
         return new VerifyCredentialsResponseModel
         {
-            EmployeeId = Guid.Parse(verifyResult.EmployeeId),
+            EmployeeId = Guid.Parse(verifyResult.PersonalDataId),
             Role = verifyResult.Role
         };
     }

@@ -30,19 +30,22 @@ public class GreeterPersonalDataService : GreeterPersonalData.GreeterPersonalDat
             Password = request.Password
         }, context.CancellationToken);
 
-        return new PersonalDataCreateResponse { Id = createItem.Id.ToString() };
+        return new PersonalDataCreateResponse { PersonalDataId = createItem.Id.ToString() };
     }
 
-    public override async Task<Empty> Update(
-        PersonalDataUpdateRequest request,
+    public override async Task<Empty> ResetPassword(
+        PersonalDataResetPasswordRequest request,
         ServerCallContext context)
     {
+        var personalModel =
+            await _provider.GetOneById(Guid.Parse(request.Id), cancellationToken: context.CancellationToken);
+
         await _manager.Update(new PersonalDataModel
         {
             Id = Guid.Parse(request.Id),
-            Email = request.Email,
+            Email = personalModel!.Email,
             Password = request.Password,
-            Role = request.Role
+            Role = personalModel.Email
         }, context.CancellationToken);
 
         return new Empty();
@@ -52,7 +55,7 @@ public class GreeterPersonalDataService : GreeterPersonalData.GreeterPersonalDat
         PersonalDataDeleteRequest request,
         ServerCallContext context)
     {
-        await _manager.Delete(Guid.Parse(request.Id), context.CancellationToken);
+        await _manager.Delete(Guid.Parse(request.PersonalDataId), context.CancellationToken);
 
         return new Empty();
     }
@@ -69,7 +72,7 @@ public class GreeterPersonalDataService : GreeterPersonalData.GreeterPersonalDat
 
         return new VerifyCredentialsResponse
         {
-            EmployeeId = resultVerify.EmployeeId.ToString(),
+            PersonalDataId = resultVerify.EmployeeId.ToString(),
             Role = resultVerify.Role
         };
     }

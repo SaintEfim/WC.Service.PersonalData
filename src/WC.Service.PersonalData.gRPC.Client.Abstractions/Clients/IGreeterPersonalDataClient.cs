@@ -10,8 +10,8 @@ public interface IGreeterPersonalDataClient
         PersonalDataCreateRequestModel request,
         CancellationToken cancellationToken = default);
 
-    Task Update(
-        PersonalDataUpdateRequestModel request,
+    Task ResetPassword(
+        PersonalDataResetPasswordRequestModel request,
         CancellationToken cancellationToken = default);
 
     Task Delete(
