@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using BCrypt.Net;
 using Microsoft.Extensions.Logging;
 using WC.Library.BCryptPasswordHash;
 using WC.Library.Domain.Services;
@@ -25,22 +24,14 @@ public class PersonalDataProvider
         _passwordHasher = passwordHasher;
     }
 
-    public async Task<PersonalDataModel?> VerifyEmailAndPassword(
+    public async Task<PersonalDataModel> VerifyEmailAndPassword(
         PersonalDataModel model,
         CancellationToken cancellationToken = default)
     {
         var personalDataEntities = await Repository.Get(cancellationToken: cancellationToken);
+        var personalData = personalDataEntities.SingleOrDefault(x =>
+            _passwordHasher.Verify(model.Password, x.Password) && _passwordHasher.Verify(model.Email, x.Email));
 
-        try
-        {
-            var personalData = personalDataEntities.SingleOrDefault(x =>
-                _passwordHasher.Verify(model.Password, x.Password) && _passwordHasher.Verify(model.Email, x.Email));
-
-            return Mapper.Map<PersonalDataModel>(personalData);
-        }
-        catch (Exception)
-        {
-            return null;
-        }
+        return Mapper.Map<PersonalDataModel>(personalData);
     }
 }
