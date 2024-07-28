@@ -38,7 +38,7 @@ public class PersonalDataProvider
 
             return Mapper.Map<PersonalDataModel>(personalData);
         }
-        catch (SaltParseException)
+        catch (Exception)
         {
             return null;
         }
