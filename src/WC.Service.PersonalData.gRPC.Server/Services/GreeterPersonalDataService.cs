@@ -45,7 +45,7 @@ public class GreeterPersonalDataService : GreeterPersonalData.GreeterPersonalDat
             Id = Guid.Parse(request.PersonalDataId),
             Email = personalModel!.Email,
             Password = request.Password,
-            Role = personalModel.Email
+            Role = personalModel.Role
         }, context.CancellationToken);
 
         return new Empty();
