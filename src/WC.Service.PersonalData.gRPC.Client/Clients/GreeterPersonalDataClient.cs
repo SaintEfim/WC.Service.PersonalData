@@ -37,7 +37,7 @@ public class GreeterPersonalDataClient : IGreeterPersonalDataClient
     {
         await _client.ResetPasswordAsync(new PersonalDataResetPasswordRequest
         {
-            Id = request.Id.ToString(),
+            PersonalDataId = request.Id.ToString(),
             Password = request.Password
         }, cancellationToken: cancellationToken);
     }
@@ -62,7 +62,7 @@ public class GreeterPersonalDataClient : IGreeterPersonalDataClient
 
         return new VerifyCredentialsResponseModel
         {
-            EmployeeId = Guid.Parse(verifyResult.PersonalDataId),
+            PersonalDataId = Guid.Parse(verifyResult.PersonalDataId),
             Role = verifyResult.Role
         };
     }

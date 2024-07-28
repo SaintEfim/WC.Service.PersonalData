@@ -37,12 +37,12 @@ public class GreeterPersonalDataService : GreeterPersonalData.GreeterPersonalDat
         PersonalDataResetPasswordRequest request,
         ServerCallContext context)
     {
-        var personalModel =
-            await _provider.GetOneById(Guid.Parse(request.Id), cancellationToken: context.CancellationToken);
+        var personalModel = await _provider.GetOneById(Guid.Parse(request.PersonalDataId),
+            cancellationToken: context.CancellationToken);
 
         await _manager.Update(new PersonalDataModel
         {
-            Id = Guid.Parse(request.Id),
+            Id = Guid.Parse(request.PersonalDataId),
             Email = personalModel!.Email,
             Password = request.Password,
             Role = personalModel.Email
@@ -72,7 +72,7 @@ public class GreeterPersonalDataService : GreeterPersonalData.GreeterPersonalDat
 
         return new VerifyCredentialsResponse
         {
-            PersonalDataId = resultVerify.EmployeeId.ToString(),
+            PersonalDataId = resultVerify.Id.ToString(),
             Role = resultVerify.Role
         };
     }
