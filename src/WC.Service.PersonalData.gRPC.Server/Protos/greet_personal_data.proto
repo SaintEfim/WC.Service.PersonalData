@@ -8,7 +8,7 @@ import "google/protobuf/empty.proto";
 
 service GreeterPersonalData {
   rpc Create (PersonalDataCreateRequest) returns (PersonalDataCreateResponse);
-  rpc Update (PersonalDataUpdateRequest) returns (google.protobuf.Empty);
+  rpc ResetPassword (PersonalDataResetPasswordRequest) returns (google.protobuf.Empty);
   rpc Delete (PersonalDataDeleteRequest) returns (google.protobuf.Empty);
   rpc VerifyCredentials (VerifyCredentialsRequest) returns (VerifyCredentialsResponse);
 }
@@ -20,18 +20,16 @@ message PersonalDataCreateRequest {
 }
 
 message PersonalDataCreateResponse {
-  string id = 1;
+  string personalDataId = 1;
 }
 
-message PersonalDataUpdateRequest {
-  string id = 1;
-  string email = 2;
-  string password = 3;
-  string role = 4;
+message PersonalDataResetPasswordRequest {
+  string personalDataId = 1;
+  string password = 2;
 }
 
 message PersonalDataDeleteRequest {
-  string id = 1;
+  string personalDataId = 1;
 }
 
 message VerifyCredentialsRequest {
@@ -40,7 +38,7 @@ message VerifyCredentialsRequest {
 }
 
 message VerifyCredentialsResponse {
-  string employeeId = 1;
-  string role = 2;
+  string personalDataId = 1;
+  string role = 5;
 }
 

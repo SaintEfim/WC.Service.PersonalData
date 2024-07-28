@@ -5,14 +5,14 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <PackageId>WC.Service.PersonalData.gRPC.Client</PackageId>
-    <Version>1.0.8</Version>
+    <Version>1.0.10</Version>
     <Authors>SaintEfim</Authors>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Autofac" Version="8.0.0"/>
-    <PackageReference Include="Grpc.AspNetCore" Version="2.65.0" />
-    <PackageReference Include="Grpc.Net.Client" Version="2.65.0" />
+    <PackageReference Include="Grpc.AspNetCore" Version="2.65.0"/>
+    <PackageReference Include="Grpc.Net.Client" Version="2.65.0"/>
   </ItemGroup>
 
   <ItemGroup>
