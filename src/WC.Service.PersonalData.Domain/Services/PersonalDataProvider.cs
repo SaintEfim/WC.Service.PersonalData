@@ -24,7 +24,7 @@ public class PersonalDataProvider
         _passwordHasher = passwordHasher;
     }
 
-    public async Task<PersonalDataModel> VerifyEmailAndPassword(
+    public async Task<PersonalDataModel?> VerifyEmailAndPassword(
         PersonalDataModel model,
         CancellationToken cancellationToken = default)
     {
@@ -32,6 +32,6 @@ public class PersonalDataProvider
         var personalData = personalDataEntities.SingleOrDefault(x =>
             _passwordHasher.Verify(model.Password, x.Password) && _passwordHasher.Verify(model.Email, x.Email));
 
-        return Mapper.Map<PersonalDataModel>(personalData);
+        return personalData == null ? null : Mapper.Map<PersonalDataModel>(personalData);
     }
 }

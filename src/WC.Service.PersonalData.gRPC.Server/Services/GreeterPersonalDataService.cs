@@ -1,5 +1,6 @@
 using Google.Protobuf.WellKnownTypes;
 using Grpc.Core;
+using WC.Library.BCryptPasswordHash;
 using WC.Service.PersonalData.Domain.Models;
 using WC.Service.PersonalData.Domain.Services;
 using WC.Service.PersonalData.gRPC.Server.Services;
@@ -10,13 +11,16 @@ public class GreeterPersonalDataService : GreeterPersonalData.GreeterPersonalDat
 {
     private readonly IPersonalDataManager _manager;
     private readonly IPersonalDataProvider _provider;
+    private readonly IBCryptPasswordHasher _passwordHasher;
 
     public GreeterPersonalDataService(
         IPersonalDataManager manager,
-        IPersonalDataProvider provider)
+        IPersonalDataProvider provider,
+        IBCryptPasswordHasher passwordHasher)
     {
         _manager = manager;
         _provider = provider;
+        _passwordHasher = passwordHasher;
     }
 
     public override async Task<PersonalDataCreateResponse> Create(
@@ -44,7 +48,7 @@ public class GreeterPersonalDataService : GreeterPersonalData.GreeterPersonalDat
         {
             Id = Guid.Parse(request.PersonalDataId),
             Email = personalModel!.Email,
-            Password = request.Password,
+            Password = _passwordHasher.Hash(request.Password),
             Role = personalModel.Role
         }, context.CancellationToken);
 
@@ -60,7 +64,7 @@ public class GreeterPersonalDataService : GreeterPersonalData.GreeterPersonalDat
         return new Empty();
     }
 
-    public override async Task<VerifyCredentialsResponse> VerifyCredentials(
+    public override async Task<VerifyCredentialsResponse?> VerifyCredentials(
         VerifyCredentialsRequest request,
         ServerCallContext context)
     {
@@ -69,6 +73,11 @@ public class GreeterPersonalDataService : GreeterPersonalData.GreeterPersonalDat
             Email = request.Email,
             Password = request.Password
         }, context.CancellationToken);
+
+        if (resultVerify == null)
+        {
+            return null;
+        }
 
         return new VerifyCredentialsResponse
         {
