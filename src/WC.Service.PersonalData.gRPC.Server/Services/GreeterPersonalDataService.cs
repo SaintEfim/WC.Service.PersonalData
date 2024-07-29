@@ -1,6 +1,5 @@
 using Google.Protobuf.WellKnownTypes;
 using Grpc.Core;
-using WC.Library.BCryptPasswordHash;
 using WC.Service.PersonalData.Domain.Models;
 using WC.Service.PersonalData.Domain.Services;
 using WC.Service.PersonalData.gRPC.Server.Services;
@@ -11,16 +10,13 @@ public class GreeterPersonalDataService : GreeterPersonalData.GreeterPersonalDat
 {
     private readonly IPersonalDataManager _manager;
     private readonly IPersonalDataProvider _provider;
-    private readonly IBCryptPasswordHasher _passwordHasher;
 
     public GreeterPersonalDataService(
         IPersonalDataManager manager,
-        IPersonalDataProvider provider,
-        IBCryptPasswordHasher passwordHasher)
+        IPersonalDataProvider provider)
     {
         _manager = manager;
         _provider = provider;
-        _passwordHasher = passwordHasher;
     }
 
     public override async Task<PersonalDataCreateResponse> Create(
@@ -41,15 +37,10 @@ public class GreeterPersonalDataService : GreeterPersonalData.GreeterPersonalDat
         PersonalDataResetPasswordRequest request,
         ServerCallContext context)
     {
-        var personalModel = await _provider.GetOneById(Guid.Parse(request.PersonalDataId),
-            cancellationToken: context.CancellationToken);
-
-        await _manager.Update(new PersonalDataModel
+        await _manager.ResetPassword(new PersonalDataModel
         {
             Id = Guid.Parse(request.PersonalDataId),
-            Email = personalModel!.Email,
-            Password = _passwordHasher.Hash(request.Password),
-            Role = personalModel.Role
+            Password = request.Password,
         }, context.CancellationToken);
 
         return new Empty();

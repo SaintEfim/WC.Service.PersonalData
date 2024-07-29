@@ -3,4 +3,9 @@ using WC.Service.PersonalData.Domain.Models;
 
 namespace WC.Service.PersonalData.Domain.Services;
 
-public interface IPersonalDataManager : IDataManager<PersonalDataModel>;
+public interface IPersonalDataManager : IDataManager<PersonalDataModel>
+{
+    Task ResetPassword(
+        PersonalDataModel model,
+        CancellationToken cancellationToken = default);
+}

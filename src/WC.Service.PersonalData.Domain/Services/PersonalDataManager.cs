@@ -35,4 +35,17 @@ public class PersonalDataManager
 
         return await base.CreateAction(model, cancellationToken);
     }
+
+    public async Task ResetPassword(
+        PersonalDataModel model,
+        CancellationToken cancellationToken = default)
+    {
+        var personalModel = await Repository.GetOneById(model.Id, cancellationToken: cancellationToken);
+
+        var personalDataPatch = Mapper.Map<PersonalDataEntity>(personalModel);
+
+        personalDataPatch.Password = _passwordHasher.Hash(model.Password);
+
+        await Repository.Update(personalDataPatch, cancellationToken);
+    }
 }
