@@ -25,7 +25,7 @@ public class GreeterPersonalDataService : GreeterPersonalData.GreeterPersonalDat
     {
         var createItem = await _manager.Create(new PersonalDataModel
         {
-            EmployeeId = Guid.Parse(request.EmployeeId),
+            Id = Guid.Parse(request.EmployeeId),
             Email = request.Email,
             Password = request.Password
         }, context.CancellationToken);

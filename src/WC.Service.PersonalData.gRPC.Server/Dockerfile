@@ -11,7 +11,6 @@ COPY src/WC.Service.PersonalData.Domain.Abstractions/WC.Service.PersonalData.Dom
 RUN dotnet restore src/WC.Service.PersonalData.gRPC.Server/WC.Service.PersonalData.gRPC.Server.csproj
 
 COPY src/ .
-
 WORKDIR /src/WC.Service.PersonalData.gRPC.Server
 RUN dotnet build -c Release -o /app/build
 
@@ -21,4 +20,5 @@ RUN dotnet publish -c Release -o /app/publish /p:UseAppHost=false
 FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
+
 ENTRYPOINT ["dotnet", "WC.Service.PersonalData.gRPC.Server.dll"]
