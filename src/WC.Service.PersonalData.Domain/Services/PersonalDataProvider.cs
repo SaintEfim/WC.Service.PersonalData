@@ -12,6 +12,7 @@ public class PersonalDataProvider
     : DataProviderBase<PersonalDataProvider, IPersonalDataRepository, PersonalDataModel, PersonalDataEntity>,
         IPersonalDataProvider
 {
+    private readonly ILogger<PersonalDataProvider> _logger;
     private readonly IBCryptPasswordHasher _passwordHasher;
 
     public PersonalDataProvider(
@@ -22,16 +23,35 @@ public class PersonalDataProvider
         : base(mapper, logger, repository)
     {
         _passwordHasher = passwordHasher;
+        _logger = logger;
     }
 
     public async Task<PersonalDataModel?> VerifyEmailAndPassword(
         PersonalDataModel model,
         CancellationToken cancellationToken = default)
     {
-        var personalDataEntities = await Repository.Get(cancellationToken: cancellationToken);
-        var personalData = personalDataEntities.SingleOrDefault(x =>
-            _passwordHasher.Verify(model.Password, x.Password) && _passwordHasher.Verify(model.Email, x.Email));
+        try
+        {
+            _logger.LogInformation("Starting verification for personal dara: {Email} and {Password}", model.Email, model.Password);
 
-        return personalData == null ? null : Mapper.Map<PersonalDataModel>(personalData);
+            var personalDataEntities = await Repository.Get(cancellationToken: cancellationToken);
+            var personalData = personalDataEntities.SingleOrDefault(x =>
+                _passwordHasher.Verify(model.Password, x.Password) && _passwordHasher.Verify(model.Email.ToLower(), x.Email));
+
+            if (personalData == null)
+            {
+                _logger.LogWarning("Verification failed for personal dara: {Email} and {Password} No matching data found.", model.Email, model.Password);
+                return null;
+            }
+
+            _logger.LogInformation("Verification succeeded for personal dara: {Email} and {Password}", model.Email, model.Password);
+
+            return Mapper.Map<PersonalDataModel>(personalData);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error occurred while verifying personal dara: {Email} and {Password}", model.Email, model.Password);
+            throw;
+        }
     }
 }
