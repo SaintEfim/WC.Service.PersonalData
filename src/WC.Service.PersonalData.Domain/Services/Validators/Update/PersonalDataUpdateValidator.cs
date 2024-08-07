@@ -3,13 +3,13 @@ using Microsoft.Extensions.DependencyInjection;
 using WC.Library.Domain.Validators;
 using WC.Service.PersonalData.Domain.Models;
 
-namespace WC.Service.PersonalData.Domain.Services.Validators.Create;
+namespace WC.Service.PersonalData.Domain.Services.Validators.Update;
 
-public sealed class PersonalDataCreateValidator
+public sealed class PersonalDataUpdateValidator
     : AbstractValidator<PersonalDataModel>,
-        IDomainCreateValidator
+        IDomainUpdateValidator
 {
-    public PersonalDataCreateValidator(
+    public PersonalDataUpdateValidator(
         IServiceProvider provider)
     {
         ClassLevelCascadeMode = CascadeMode.Stop;
@@ -18,9 +18,6 @@ public sealed class PersonalDataCreateValidator
             .SetValidator(provider.GetService<PersonalDataModelValidator>());
 
         RuleFor(x => x)
-            .SetValidator(provider.GetService<PersonalDataCreateCheckEmailDomainValidator>());
-
-        RuleFor(x => x)
-            .SetValidator(provider.GetService<PersonalDataCreateDbValidator>());
+            .SetValidator(provider.GetService<PersonalDataUpdateDbValidator>());
     }
 }
