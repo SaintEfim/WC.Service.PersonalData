@@ -67,7 +67,7 @@ public class PersonalDataManager
         {
             _logger.LogInformation("Creating personal data for Id: {Id}", model.Id);
 
-            model.Email = _passwordHasher.Hash(model.Email.ToLower());
+            model.Email = model.Email.ToLower();
             model.Password = _passwordHasher.Hash(model.Password);
 
             var result = await base.CreateAction(model, cancellationToken);
