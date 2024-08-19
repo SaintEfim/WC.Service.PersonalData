@@ -4,9 +4,8 @@ using Grpc.Core;
 using WC.Library.Shared.Exceptions;
 using WC.Service.PersonalData.Domain.Models;
 using WC.Service.PersonalData.Domain.Services;
-using WC.Service.PersonalData.gRPC.Server.Services;
 
-namespace WC.Service.EmailDomains.gRPC.Server.Services;
+namespace WC.Service.PersonalData.API.gRPC.Services;
 
 public class GreeterPersonalDataService : GreeterPersonalData.GreeterPersonalDataBase
 {
@@ -34,10 +33,10 @@ public class GreeterPersonalDataService : GreeterPersonalData.GreeterPersonalDat
 
             var createItem = await _manager.Create(new PersonalDataModel
             {
-                Id = Guid.Parse(request.EmployeeId),
+                EmployeeId = Guid.Parse(request.EmployeeId),
                 Email = request.Email,
                 Password = request.Password
-            }, context.CancellationToken);
+            }, cancellationToken: context.CancellationToken);
 
             _logger.LogInformation("Successfully created personal data with Id: {Id}", createItem.Id);
 
@@ -70,7 +69,7 @@ public class GreeterPersonalDataService : GreeterPersonalData.GreeterPersonalDat
             {
                 Id = Guid.Parse(request.PersonalDataId),
                 Password = request.Password
-            }, context.CancellationToken);
+            }, cancellationToken: context.CancellationToken);
 
             _logger.LogInformation("Successfully reset password for PersonalDataId: {PersonalDataId}",
                 request.PersonalDataId);
@@ -108,7 +107,7 @@ public class GreeterPersonalDataService : GreeterPersonalData.GreeterPersonalDat
             _logger.LogInformation("Received Delete request for PersonalDataId: {PersonalDataId}",
                 request.PersonalDataId);
 
-            await _manager.Delete(Guid.Parse(request.PersonalDataId), context.CancellationToken);
+            await _manager.Delete(Guid.Parse(request.PersonalDataId), cancellationToken: context.CancellationToken);
 
             _logger.LogInformation("Successfully deleted personal data with PersonalDataId: {PersonalDataId}",
                 request.PersonalDataId);
@@ -135,21 +134,24 @@ public class GreeterPersonalDataService : GreeterPersonalData.GreeterPersonalDat
     {
         try
         {
-            _logger.LogInformation("Received VerifyCredentials request for personal dara: {Email} and {Password}", request.Email, request.Password);
+            _logger.LogInformation("Received VerifyCredentials request for personal dara: {Email} and {Password}",
+                request.Email, request.Password);
 
             var resultVerify = await _provider.VerifyEmailAndPassword(new PersonalDataModel
             {
                 Email = request.Email,
                 Password = request.Password
-            }, context.CancellationToken);
+            }, cancellationToken: context.CancellationToken);
 
             if (resultVerify == null)
             {
-                _logger.LogWarning("Credentials verification failed for personal dara: {Email} and {Password}", request.Email, request.Password);
+                _logger.LogWarning("Credentials verification failed for personal dara: {Email} and {Password}",
+                    request.Email, request.Password);
                 return null;
             }
 
-            _logger.LogInformation("Credentials successfully verified for personal dara: {Email} and {Password}", request.Email, request.Password);
+            _logger.LogInformation("Credentials successfully verified for personal dara: {Email} and {Password}",
+                request.Email, request.Password);
 
             return new VerifyCredentialsResponse
             {
@@ -159,7 +161,8 @@ public class GreeterPersonalDataService : GreeterPersonalData.GreeterPersonalDat
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Error occurred while verifying credentials for personal dara: {Email} and {Password}", request.Email, request.Password);
+            _logger.LogError(ex, "Error occurred while verifying credentials for personal dara: {Email} and {Password}",
+                request.Email, request.Password);
             throw new RpcException(new Status(StatusCode.Internal, "An unexpected error occurred."), ex.Message);
         }
     }

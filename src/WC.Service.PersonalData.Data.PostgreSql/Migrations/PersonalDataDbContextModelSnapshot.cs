@@ -32,6 +32,9 @@ namespace WC.Service.PersonalData.Data.PostgreSql.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<Guid>("EmployeeId")
+                        .HasColumnType("uuid");
+
                     b.Property<string>("Password")
                         .IsRequired()
                         .HasColumnType("text");
@@ -42,7 +45,7 @@ namespace WC.Service.PersonalData.Data.PostgreSql.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("PersonalData");
+                    b.ToTable("PersonalData", (string)null);
                 });
 #pragma warning restore 612, 618
         }

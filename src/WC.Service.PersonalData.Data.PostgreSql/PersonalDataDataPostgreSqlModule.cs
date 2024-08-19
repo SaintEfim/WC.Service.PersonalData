@@ -10,6 +10,8 @@ public class PersonalDataDataPostgreSqlModule : Module
     protected override void Load(
         ContainerBuilder builder)
     {
+        builder.RegisterModule<PersonalDataServiceDataModule>();
+
         builder.RegisterAssemblyTypes(ThisAssembly)
             .AsClosedTypesOf(typeof(IRepository<>))
             .AsImplementedInterfaces();

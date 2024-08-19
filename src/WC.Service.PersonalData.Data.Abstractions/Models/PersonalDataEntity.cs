@@ -4,9 +4,11 @@ namespace WC.Service.PersonalData.Data.Models;
 
 public class PersonalDataEntity : EntityBase
 {
-    public required string Email { get; set; }
+    public Guid EmployeeId { get; set; }
 
-    public required string Password { get; set; }
+    public string Email { get; set; } = string.Empty;
 
-    public required string Role { get; set; }
+    public string Password { get; set; } = string.Empty;
+
+    public string Role { get; set; } = string.Empty;
 }

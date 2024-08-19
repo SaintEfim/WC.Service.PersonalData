@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.Extensions.Logging;
 using WC.Library.BCryptPasswordHash;
+using WC.Library.Data.Services;
 using WC.Library.Domain.Services;
 using WC.Service.PersonalData.Data.Models;
 using WC.Service.PersonalData.Data.Repositories;
@@ -28,29 +29,37 @@ public class PersonalDataProvider
 
     public async Task<PersonalDataModel?> VerifyEmailAndPassword(
         PersonalDataModel model,
+        IWcTransaction? transaction = default,
         CancellationToken cancellationToken = default)
     {
         try
         {
-            _logger.LogInformation("Starting verification for personal dara: {Email} and {Password}", model.Email, model.Password);
+            _logger.LogInformation("Starting verification for personal dara: {Email} and {Password}", model.Email,
+                model.Password);
 
-            var personalDataEntities = await Repository.Get(cancellationToken: cancellationToken);
+            var personalDataEntities =
+                await Repository.Get(transaction: transaction, cancellationToken: cancellationToken);
             var personalData = personalDataEntities.SingleOrDefault(x =>
-                _passwordHasher.Verify(model.Password, x.Password) && _passwordHasher.Verify(model.Email.ToLower(), x.Email));
+                _passwordHasher.Verify(model.Password, x.Password) &&
+                _passwordHasher.Verify(model.Email.ToLower(), x.Email));
 
             if (personalData == null)
             {
-                _logger.LogWarning("Verification failed for personal dara: {Email} and {Password} No matching data found.", model.Email, model.Password);
+                _logger.LogWarning(
+                    "Verification failed for personal dara: {Email} and {Password} No matching data found.",
+                    model.Email, model.Password);
                 return null;
             }
 
-            _logger.LogInformation("Verification succeeded for personal dara: {Email} and {Password}", model.Email, model.Password);
+            _logger.LogInformation("Verification succeeded for personal dara: {Email} and {Password}", model.Email,
+                model.Password);
 
             return Mapper.Map<PersonalDataModel>(personalData);
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, "Error occurred while verifying personal dara: {Email} and {Password}", model.Email, model.Password);
+            _logger.LogError(ex, "Error occurred while verifying personal dara: {Email} and {Password}", model.Email,
+                model.Password);
             throw;
         }
     }

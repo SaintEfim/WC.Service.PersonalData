@@ -1,9 +1,9 @@
 ﻿using Autofac;
-using WC.Service.EmailDomains.gRPC.Server.Services;
+using WC.Service.PersonalData.API.gRPC.Services;
 using WC.Service.PersonalData.Domain;
 using StartupBase = WC.Library.Web.Startup.StartupBase;
 
-namespace WC.Service.EmailDomains.gRPC.Server;
+namespace WC.Service.PersonalData.API;
 
 internal sealed class Startup : StartupBase
 {
