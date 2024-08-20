@@ -30,7 +30,7 @@ public class PersonalDataController
     }
 
     /// <summary>
-    ///     Retrieves a list of personal datas.
+    ///     Retrieves a list of personal data.
     /// </summary>
     /// <param name="withIncludes">Specifies whether related entities should be included in the query.</param>
     /// <param name="cancellationToken">The operation cancellation token.</param>
@@ -92,7 +92,7 @@ public class PersonalDataController
     [SwaggerResponse(Status404NotFound, typeof(ErrorDto))]
     public async Task<IActionResult> PersonalDataUpdate(
         Guid id,
-        [FromBody] JsonPatchDocument<PersonalDataDto> patchDocument,
+        [FromBody] JsonPatchDocument<PersonalDataUpdateDto> patchDocument,
         CancellationToken cancellationToken = default)
     {
         return Ok(await Update(id, patchDocument, cancellationToken: cancellationToken));

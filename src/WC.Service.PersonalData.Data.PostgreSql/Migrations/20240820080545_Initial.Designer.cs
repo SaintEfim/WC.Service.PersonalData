@@ -12,7 +12,7 @@ using WC.Service.PersonalData.Data.PostgreSql.Context;
 namespace WC.Service.PersonalData.Data.PostgreSql.Migrations
 {
     [DbContext(typeof(PersonalDataDbContext))]
-    [Migration("20240727123929_Initial")]
+    [Migration("20240820080545_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -20,7 +20,7 @@ namespace WC.Service.PersonalData.Data.PostgreSql.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.7")
+                .HasAnnotation("ProductVersion", "8.0.8")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
@@ -42,11 +42,16 @@ namespace WC.Service.PersonalData.Data.PostgreSql.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<string>("Role")
-                        .IsRequired()
-                        .HasColumnType("text");
+                    b.Property<byte>("Role")
+                        .HasColumnType("smallint");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("Email")
+                        .IsUnique();
+
+                    b.HasIndex("EmployeeId")
+                        .IsUnique();
 
                     b.ToTable("PersonalData");
                 });

@@ -22,6 +22,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WC.Service.PersonalData.gRP
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WC.Service.PersonalData.API", "src\WC.Service.PersonalData.API\WC.Service.PersonalData.API.csproj", "{BDB73A92-1BF2-44C1-B258-F792181A6D3C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WC.Service.PersonalData.Shared", "src\WC.Service.PersonalData.Shared\WC.Service.PersonalData.Shared.csproj", "{4A0D468E-009D-4CFD-85DC-F1E01CD75CE9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -60,5 +62,9 @@ Global
 		{BDB73A92-1BF2-44C1-B258-F792181A6D3C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BDB73A92-1BF2-44C1-B258-F792181A6D3C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BDB73A92-1BF2-44C1-B258-F792181A6D3C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4A0D468E-009D-4CFD-85DC-F1E01CD75CE9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4A0D468E-009D-4CFD-85DC-F1E01CD75CE9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4A0D468E-009D-4CFD-85DC-F1E01CD75CE9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4A0D468E-009D-4CFD-85DC-F1E01CD75CE9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

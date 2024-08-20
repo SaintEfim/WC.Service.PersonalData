@@ -18,10 +18,12 @@ public sealed class PersonalDataCreateDbValidator : AbstractValidator<PersonalDa
                 cancellationToken) =>
             {
                 var existingPersonalData = (await personalDataRepository.Get(cancellationToken: cancellationToken))
-                    .Where(x => x.EmployeeId == model.EmployeeId || passwordHasher.Verify(model.Email, x.Email))
+                    .Where(x => x.EmployeeId == model.EmployeeId ||
+                                model.Email.Equals(x.Email, StringComparison.CurrentCultureIgnoreCase))
                     .ToList();
 
-                if (existingPersonalData.Any(x => passwordHasher.Verify(model.Email, x.Email)))
+                if (existingPersonalData.Any(
+                        x => model.Email.Equals(x.Email, StringComparison.CurrentCultureIgnoreCase)))
                 {
                     context.AddFailure(nameof(PersonalDataModel.Email),
                         "An employee with this email is already registered.");

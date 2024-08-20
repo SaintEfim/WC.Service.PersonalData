@@ -1,14 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using WC.Library.Web.Models;
 using WC.Service.PersonalData.Shared.Models;
 
 namespace WC.Service.PersonalData.API.Models;
 
-public class PersonalDataDto : DtoBase
+public class PersonalDataUpdateDto
 {
-    [Required]
-    public required Guid EmployeeId { get; set; }
-
     [Required]
     public required string Email { get; set; }
 
@@ -16,5 +12,5 @@ public class PersonalDataDto : DtoBase
     public required string Password { get; set; }
 
     [Required]
-    public UserRole Role { get; set; }
+    public required UserRole Role { get; set; }
 }
