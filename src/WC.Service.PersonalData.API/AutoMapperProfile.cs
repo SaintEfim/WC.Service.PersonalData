@@ -14,5 +14,7 @@ public class AutoMapperProfile : Profile
         CreateMap<PersonalDataCreateDto, PersonalDataModel>();
 
         CreateMap<PersonalDataModel, CreateActionResultDto>();
+
+        CreateMap<PersonalDataUpdateDto, PersonalDataModel>();
     }
 }
