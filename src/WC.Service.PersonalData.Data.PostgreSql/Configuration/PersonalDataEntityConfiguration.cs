@@ -5,7 +5,7 @@ using WC.Service.PersonalData.Shared.Models;
 
 namespace WC.Service.PersonalData.Data.PostgreSql.Configuration;
 
-public class PersonalDataConfiguration : IEntityTypeConfiguration<PersonalDataEntity>
+public class PersonalDataEntityConfiguration : IEntityTypeConfiguration<PersonalDataEntity>
 {
     public void Configure(
         EntityTypeBuilder<PersonalDataEntity> builder)

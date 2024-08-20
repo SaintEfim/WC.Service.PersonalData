@@ -23,7 +23,7 @@ public sealed class PersonalDataDbContext : DbContext
     protected override void OnModelCreating(
         ModelBuilder modelBuilder)
     {
-        modelBuilder.ApplyConfiguration(new PersonalDataConfiguration());
+        modelBuilder.ApplyConfiguration(new PersonalDataEntityConfiguration());
 
         base.OnModelCreating(modelBuilder);
     }
