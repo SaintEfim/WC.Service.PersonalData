@@ -3,11 +3,11 @@ using WC.Service.EmailDomains.gRPC.Client.Clients;
 using WC.Service.EmailDomains.gRPC.Client.Models.DoesEmailDomainExist;
 using WC.Service.PersonalData.Domain.Models;
 
-namespace WC.Service.PersonalData.Domain.Services.Validators.Create;
+namespace WC.Service.PersonalData.Domain.Services.Validators;
 
-public sealed class PersonalDataCreateCheckEmailDomainValidator : AbstractValidator<PersonalDataModel>
+public sealed class PersonalDataCheckEmailDomainValidator : AbstractValidator<PersonalDataModel>
 {
-    public PersonalDataCreateCheckEmailDomainValidator(
+    public PersonalDataCheckEmailDomainValidator(
         IGreeterEmailDomainsClient emailDomainsClient)
     {
         RuleFor(x => x.Email)

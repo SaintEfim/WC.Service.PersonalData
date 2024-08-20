@@ -8,7 +8,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="WC.Library.Data.Abstractions" Version="1.0.5"/>
+    <PackageReference Include="WC.Library.Data.Abstractions" Version="1.0.6"/>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\WC.Service.PersonalData.Shared\WC.Service.PersonalData.Shared.csproj"/>
   </ItemGroup>
 
 </Project>

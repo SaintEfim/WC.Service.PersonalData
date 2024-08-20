@@ -11,17 +11,22 @@ public sealed class PersonalDataCreateDbValidator : AbstractValidator<PersonalDa
         IBCryptPasswordHasher passwordHasher,
         IPersonalDataRepository personalDataRepository)
     {
-        RuleFor(x => x.Email)
+        RuleFor(x => x)
             .CustomAsync(async (
-                email,
+                model,
                 context,
                 cancellationToken) =>
             {
-                var existingPersonalData = await personalDataRepository.Get(cancellationToken: cancellationToken);
+                var existingPersonalData = (await personalDataRepository.Get(cancellationToken: cancellationToken))
+                    .Where(x => x.EmployeeId == model.EmployeeId ||
+                                model.Email.Equals(x.Email, StringComparison.CurrentCultureIgnoreCase))
+                    .ToList();
 
-                if (existingPersonalData.Any(x => passwordHasher.Verify(email, x.Email)))
+                if (existingPersonalData.Any(
+                        x => model.Email.Equals(x.Email, StringComparison.CurrentCultureIgnoreCase)))
                 {
-                    context.AddFailure(nameof(PersonalDataModel.Email), "The email already exists.");
+                    context.AddFailure(nameof(PersonalDataModel.Email),
+                        "An employee with this email is already registered.");
                 }
             });
     }

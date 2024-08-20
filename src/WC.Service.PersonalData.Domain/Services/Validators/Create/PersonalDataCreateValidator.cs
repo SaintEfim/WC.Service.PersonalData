@@ -18,7 +18,7 @@ public sealed class PersonalDataCreateValidator
             .SetValidator(provider.GetService<PersonalDataModelValidator>());
 
         RuleFor(x => x)
-            .SetValidator(provider.GetService<PersonalDataCreateCheckEmailDomainValidator>());
+            .SetValidator(provider.GetService<PersonalDataCheckEmailDomainValidator>());
 
         RuleFor(x => x)
             .SetValidator(provider.GetService<PersonalDataCreateDbValidator>());

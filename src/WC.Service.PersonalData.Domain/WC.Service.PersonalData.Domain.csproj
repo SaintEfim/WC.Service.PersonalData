@@ -9,7 +9,7 @@
   <ItemGroup>
     <PackageReference Include="Autofac" Version="8.0.0"/>
     <PackageReference Include="WC.Library.BCryptPasswordHash" Version="1.0.2"/>
-    <PackageReference Include="WC.Library.Domain" Version="1.0.24"/>
+    <PackageReference Include="WC.Library.Domain" Version="1.0.26"/>
     <PackageReference Include="WC.Library.Employee.Shared" Version="1.0.11"/>
     <PackageReference Include="WC.Service.EmailDomains.gRPC.Client" Version="1.0.1"/>
   </ItemGroup>

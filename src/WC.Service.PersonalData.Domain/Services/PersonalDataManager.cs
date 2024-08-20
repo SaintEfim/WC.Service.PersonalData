@@ -2,6 +2,7 @@
 using FluentValidation;
 using Microsoft.Extensions.Logging;
 using WC.Library.BCryptPasswordHash;
+using WC.Library.Data.Services;
 using WC.Library.Domain.Services;
 using WC.Library.Domain.Validators;
 using WC.Library.Shared.Exceptions;
@@ -32,6 +33,7 @@ public class PersonalDataManager
 
     public async Task ResetPassword(
         PersonalDataModel model,
+        IWcTransaction? transaction = default,
         CancellationToken cancellationToken = default)
     {
         try
@@ -39,11 +41,12 @@ public class PersonalDataManager
             _logger.LogInformation("Resetting password for personal data with Id: {Id}", model.Id);
             Validate<IDomainUpdateValidator>(model, cancellationToken);
 
-            var personalModel = await Repository.GetOneById(model.Id, cancellationToken: cancellationToken);
+            var personalModel = await Repository.GetOneById(model.Id, transaction: transaction,
+                cancellationToken: cancellationToken);
             var personalDataPatch = Mapper.Map<PersonalDataEntity>(personalModel);
             personalDataPatch.Password = _passwordHasher.Hash(model.Password);
 
-            await Repository.Update(personalDataPatch, cancellationToken);
+            await Repository.Update(personalDataPatch, transaction, cancellationToken);
             _logger.LogInformation("Password successfully reset for personal data with Id: {Id}", model.Id);
         }
         catch (ValidationException ex)
@@ -61,6 +64,7 @@ public class PersonalDataManager
 
     protected override async Task<PersonalDataModel> CreateAction(
         PersonalDataModel model,
+        IWcTransaction? transaction = default,
         CancellationToken cancellationToken = default)
     {
         try
@@ -70,7 +74,7 @@ public class PersonalDataManager
             model.Email = model.Email.ToLower();
             model.Password = _passwordHasher.Hash(model.Password);
 
-            var result = await base.CreateAction(model, cancellationToken);
+            var result = await base.CreateAction(model, transaction, cancellationToken);
 
             _logger.LogInformation("Successfully created personal data with Id: {Id}", result.Id);
 

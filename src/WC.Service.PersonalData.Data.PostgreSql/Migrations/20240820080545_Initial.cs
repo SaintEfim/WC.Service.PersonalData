@@ -19,12 +19,24 @@ namespace WC.Service.PersonalData.Data.PostgreSql.Migrations
                     EmployeeId = table.Column<Guid>(type: "uuid", nullable: false),
                     Email = table.Column<string>(type: "text", nullable: false),
                     Password = table.Column<string>(type: "text", nullable: false),
-                    Role = table.Column<string>(type: "text", nullable: false)
+                    Role = table.Column<byte>(type: "smallint", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_PersonalData", x => x.Id);
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_PersonalData_Email",
+                table: "PersonalData",
+                column: "Email",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_PersonalData_EmployeeId",
+                table: "PersonalData",
+                column: "EmployeeId",
+                unique: true);
         }
 
         /// <inheritdoc />

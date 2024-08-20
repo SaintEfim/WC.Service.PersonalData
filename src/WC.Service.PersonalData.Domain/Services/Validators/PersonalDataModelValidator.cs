@@ -8,6 +8,9 @@ public sealed class PersonalDataModelValidator : AbstractValidator<PersonalDataM
 {
     public PersonalDataModelValidator()
     {
+        RuleFor(x => x.EmployeeId)
+            .NotEmpty();
+
         RuleFor(x => x.Email)
             .NotNull()
             .SetValidator(new EmailValidator(nameof(PersonalDataModel.Email)));
