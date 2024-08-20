@@ -7,9 +7,8 @@ namespace WC.Service.PersonalData.Data.PostgreSql.Context;
 public sealed class PersonalDataDbContextFactory : PostgreSqlDbContextFactoryBase<PersonalDataDbContext>
 {
     public PersonalDataDbContextFactory(
-        IConfiguration configuration,
-        IHostEnvironment environment)
-        : base(configuration, environment)
+        IConfiguration configuration)
+        : base(configuration)
     {
     }
 

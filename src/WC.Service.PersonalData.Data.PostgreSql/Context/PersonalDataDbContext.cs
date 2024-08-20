@@ -8,14 +8,10 @@ namespace WC.Service.PersonalData.Data.PostgreSql.Context;
 public sealed class PersonalDataDbContext : DbContext
 {
     public PersonalDataDbContext(
-        DbContextOptions<PersonalDataDbContext> options,
-        IHostEnvironment environment)
+        DbContextOptions<PersonalDataDbContext> options)
         : base(options)
     {
-        // if (environment.IsDevelopment())
-        // {
-        //     Database.Migrate();
-        // }
+        Database.Migrate();
     }
 
     public DbSet<PersonalDataEntity> PersonalData { get; set; } = null!;

@@ -13,9 +13,6 @@ public class PersonalDataEntityConfiguration : IEntityTypeConfiguration<Personal
         builder.Property(x => x.EmployeeId)
             .IsRequired();
 
-        builder.HasIndex(x => x.EmployeeId)
-            .IsUnique();
-
         builder.Property(x => x.Email)
             .IsRequired();
 
