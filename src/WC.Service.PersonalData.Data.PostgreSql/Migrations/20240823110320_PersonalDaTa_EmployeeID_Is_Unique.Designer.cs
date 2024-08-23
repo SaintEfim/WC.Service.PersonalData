@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using WC.Service.PersonalData.Data.PostgreSql.Context;
@@ -11,9 +12,11 @@ using WC.Service.PersonalData.Data.PostgreSql.Context;
 namespace WC.Service.PersonalData.Data.PostgreSql.Migrations
 {
     [DbContext(typeof(PersonalDataDbContext))]
-    partial class PersonalDataDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240823110320_PersonalDaTa_EmployeeID_Is_Unique")]
+    partial class PersonalDaTa_EmployeeID_Is_Unique
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
