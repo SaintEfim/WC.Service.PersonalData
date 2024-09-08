@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Hosting;
 using WC.Service.PersonalData.Data.Models;
 using WC.Service.PersonalData.Data.PostgreSql.Configuration;
 
