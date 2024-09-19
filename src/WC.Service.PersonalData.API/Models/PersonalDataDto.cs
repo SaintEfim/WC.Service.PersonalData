@@ -1,4 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 using WC.Library.Web.Models;
 using WC.Service.PersonalData.Shared.Models;
 
@@ -16,5 +18,6 @@ public class PersonalDataDto : DtoBase
     public required string Password { get; set; }
 
     [Required]
+    [JsonConverter(typeof(StringEnumConverter))]
     public UserRole Role { get; set; }
 }
