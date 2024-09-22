@@ -86,4 +86,15 @@ public class PersonalDataManager
             throw;
         }
     }
+
+    public override async Task<PersonalDataModel> Delete(
+        Guid id,
+        IWcTransaction? transaction = default,
+        CancellationToken cancellationToken = default)
+    {
+        var personalData = (await Repository.Get(transaction: transaction, cancellationToken: cancellationToken))
+            .SingleOrDefault(x => x.EmployeeId == id);
+
+        return await base.DeleteAction(personalData!.Id, transaction, cancellationToken);
+    }
 }
