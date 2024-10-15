@@ -1,5 +1,4 @@
 ﻿using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Hosting;
 using WC.Library.Data.PostgreSql.Context;
 
 namespace WC.Service.PersonalData.Data.PostgreSql.Context;

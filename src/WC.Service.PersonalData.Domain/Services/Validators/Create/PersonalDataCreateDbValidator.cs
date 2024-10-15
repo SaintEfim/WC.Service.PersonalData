@@ -24,13 +24,6 @@ public sealed class PersonalDataCreateDbValidator : AbstractValidator<PersonalDa
                     context.AddFailure(nameof(PersonalDataModel.Email),
                         "An employee with this email is already registered.");
                 }
-
-                if (existingPersonalData.Any(x =>
-                        personalData.Email.Equals(x.Email, StringComparison.CurrentCultureIgnoreCase)))
-                {
-                    context.AddFailure(nameof(PersonalDataModel.Email),
-                        "An employee with this email is already registered.");
-                }
             });
     }
 }

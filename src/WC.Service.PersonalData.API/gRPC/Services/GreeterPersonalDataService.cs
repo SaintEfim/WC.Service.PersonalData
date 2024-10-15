@@ -46,13 +46,13 @@ public class GreeterPersonalDataService : GreeterPersonalData.GreeterPersonalDat
         {
             _logger.LogWarning(ex, "Validation failed for Create request with EmployeeId: {EmployeeId}",
                 request.EmployeeId);
-            throw new RpcException(new Status(StatusCode.InvalidArgument, "Validation failed."), ex.Message);
+            throw new RpcException(new Status(StatusCode.InvalidArgument, $"{ex.Message}"));
         }
         catch (Exception ex)
         {
             _logger.LogError(ex, "Error occurred while processing Create request for EmployeeId: {EmployeeId}",
                 request.EmployeeId);
-            throw new RpcException(new Status(StatusCode.Internal, "An unexpected error occurred."), ex.Message);
+            throw new RpcException(new Status(StatusCode.Internal, $"{ex.Message}"));
         }
     }
 
@@ -80,21 +80,21 @@ public class GreeterPersonalDataService : GreeterPersonalData.GreeterPersonalDat
         {
             _logger.LogWarning(ex, "Validation failed for ResetPassword request with PersonalDataId: {PersonalDataId}",
                 request.PersonalDataId);
-            throw new RpcException(new Status(StatusCode.InvalidArgument, "Validation failed."), ex.Message);
+            throw new RpcException(new Status(StatusCode.InvalidArgument, $"{ex.Message}"));
         }
         catch (NotFoundException ex)
         {
             _logger.LogWarning(ex,
                 "Personal data not found for ResetPassword request with PersonalDataId: {PersonalDataId}",
                 request.PersonalDataId);
-            throw new RpcException(new Status(StatusCode.NotFound, "Personal data not found."), ex.Message);
+            throw new RpcException(new Status(StatusCode.NotFound, $"{ex.Message}"));
         }
         catch (Exception ex)
         {
             _logger.LogError(ex,
                 "Error occurred while processing ResetPassword request for PersonalDataId: {PersonalDataId}",
                 request.PersonalDataId);
-            throw new RpcException(new Status(StatusCode.Internal, "An unexpected error occurred."), ex.Message);
+            throw new RpcException(new Status(StatusCode.Internal, $"{ex.Message}"));
         }
     }
 
@@ -118,13 +118,13 @@ public class GreeterPersonalDataService : GreeterPersonalData.GreeterPersonalDat
         {
             _logger.LogWarning(ex, "Personal data not found for Delete request with PersonalDataId: {PersonalDataId}",
                 request.PersonalDataId);
-            throw new RpcException(new Status(StatusCode.NotFound, "Personal data not found."), ex.Message);
+            throw new RpcException(new Status(StatusCode.NotFound, $"{ex.Message}"));
         }
         catch (Exception ex)
         {
             _logger.LogError(ex, "Error occurred while processing Delete request for PersonalDataId: {PersonalDataId}",
                 request.PersonalDataId);
-            throw new RpcException(new Status(StatusCode.Internal, "An unexpected error occurred."), ex.Message);
+            throw new RpcException(new Status(StatusCode.Internal, $"{ex.Message}"));
         }
     }
 
@@ -163,7 +163,7 @@ public class GreeterPersonalDataService : GreeterPersonalData.GreeterPersonalDat
         {
             _logger.LogError(ex, "Error occurred while verifying credentials for personal dara: {Email} and {Password}",
                 request.Email, request.Password);
-            throw new RpcException(new Status(StatusCode.Internal, "An unexpected error occurred."), ex.Message);
+            throw new RpcException(new Status(StatusCode.Internal, $"{ex.Message}"));
         }
     }
 }

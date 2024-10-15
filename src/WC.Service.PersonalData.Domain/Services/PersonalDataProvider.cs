@@ -40,8 +40,7 @@ public class PersonalDataProvider
             var personalDataEntities =
                 await Repository.Get(transaction: transaction, cancellationToken: cancellationToken);
             var personalData = personalDataEntities.SingleOrDefault(x =>
-                _passwordHasher.Verify(model.Password, x.Password) &&
-                _passwordHasher.Verify(model.Email.ToLower(), x.Email));
+                _passwordHasher.Verify(model.Password, x.Password) && x.Email.Equals(model.Email, StringComparison.CurrentCultureIgnoreCase));
 
             if (personalData == null)
             {
