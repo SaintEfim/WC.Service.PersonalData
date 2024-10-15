@@ -155,7 +155,7 @@ public class GreeterPersonalDataService : GreeterPersonalData.GreeterPersonalDat
 
             return new VerifyCredentialsResponse
             {
-                EmployeeId = resultVerify.Id.ToString(),
+                EmployeeId = resultVerify.EmployeeId.ToString(),
                 Role = resultVerify.Role.ToString()
             };
         }
