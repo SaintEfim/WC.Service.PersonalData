@@ -38,6 +38,6 @@ message VerifyCredentialsRequest {
 }
 
 message VerifyCredentialsResponse {
-  string personalDataId = 1;
+  string employeeId = 1;
   string role = 5;
 }

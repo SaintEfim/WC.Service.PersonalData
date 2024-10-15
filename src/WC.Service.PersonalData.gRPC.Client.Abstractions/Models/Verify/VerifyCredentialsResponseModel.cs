@@ -2,7 +2,7 @@
 
 public class VerifyCredentialsResponseModel
 {
-    public required Guid PersonalDataId { get; set; }
+    public required Guid EmployeeId { get; set; }
 
     public required string Role { get; set; }
 }

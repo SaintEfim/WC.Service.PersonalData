@@ -62,7 +62,7 @@ public class GreeterPersonalDataClient : IGreeterPersonalDataClient
 
         return new VerifyCredentialsResponseModel
         {
-            PersonalDataId = Guid.Parse(verifyResult.PersonalDataId),
+            EmployeeId = Guid.Parse(verifyResult.EmployeeId),
             Role = verifyResult.Role
         };
     }
