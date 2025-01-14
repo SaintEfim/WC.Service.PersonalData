@@ -7,8 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Autofac" Version="8.0.0"/>
-    <PackageReference Include="WC.Library.Data.PostgreSql" Version="1.0.7" />
+    <PackageReference Include="Autofac" Version="8.2.0" />
+    <PackageReference Include="WC.Library.Data.PostgreSql" Version="1.0.26" />
   </ItemGroup>
 
   <ItemGroup>

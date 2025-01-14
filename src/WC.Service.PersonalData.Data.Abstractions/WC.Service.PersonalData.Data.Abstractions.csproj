@@ -8,7 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="WC.Library.Data.Abstractions" Version="1.0.6"/>
+    <PackageReference Include="WC.Library.Data.Abstractions" Version="1.0.32" />
   </ItemGroup>
 
   <ItemGroup>
