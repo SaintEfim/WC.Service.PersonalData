@@ -9,6 +9,7 @@ using WC.Library.Shared.Exceptions;
 using WC.Service.PersonalData.Data.Models;
 using WC.Service.PersonalData.Data.Repositories;
 using WC.Service.PersonalData.Domain.Models;
+using WC.Service.PersonalData.Shared.Models;
 
 namespace WC.Service.PersonalData.Domain.Services;
 
@@ -18,16 +19,19 @@ public class PersonalDataManager
 {
     private readonly ILogger<PersonalDataManager> _logger;
     private readonly IBCryptPasswordHasher _passwordHasher;
+    private readonly IWcTransactionService _transactionService;
 
     public PersonalDataManager(
         IMapper mapper,
         ILogger<PersonalDataManager> logger,
         IPersonalDataRepository repository,
         IEnumerable<IValidator> validators,
-        IBCryptPasswordHasher passwordHasher)
+        IBCryptPasswordHasher passwordHasher,
+        IWcTransactionService transactionService)
         : base(mapper, logger, repository, validators)
     {
         _passwordHasher = passwordHasher;
+        _transactionService = transactionService;
         _logger = logger;
     }
 
@@ -67,24 +71,45 @@ public class PersonalDataManager
         IWcTransaction? transaction = default,
         CancellationToken cancellationToken = default)
     {
-        try
+        return await _transactionService.Execute(async (
+            tr,
+            token) =>
         {
-            _logger.LogInformation("Creating personal data for Id: {Id}", model.Id);
+            try
+            {
+                _logger.LogInformation("Creating personal data for Id: {Id}", model.Id);
 
-            model.Email = model.Email.ToLower();
-            model.Password = _passwordHasher.Hash(model.Password);
+                model.Email = model.Email.ToLower();
 
-            var result = await base.CreateAction(model, transaction, cancellationToken);
+                model.Password = _passwordHasher.Hash(model.Password);
 
-            _logger.LogInformation("Successfully created personal data with Id: {Id}", result.Id);
+                var result = await base.CreateAction(model, tr, token);
 
-            return result;
-        }
-        catch (Exception ex)
-        {
-            _logger.LogError(ex, "Error occurred while creating personal data for Id: {Id}", model.Id);
-            throw;
-        }
+                _logger.LogInformation("Successfully created personal data with Id: {Id}", result.Id);
+
+                var emailLocalPart = Environment.GetEnvironmentVariable("ADMIN_EMAIL_LOCAL_PART") ?? "admin";
+                var emailDomain = Environment.GetEnvironmentVariable("ADMIN_EMAIL_DOMAIN") ?? "admin.com";
+                var expectedEmail = $"{emailLocalPart}@{emailDomain}".ToLower();
+                var expectedPassword = Environment.GetEnvironmentVariable("ADMIN_PASSWORD") ?? "Admin@12345678";
+
+                if (result.Email != expectedEmail || !_passwordHasher.Verify(expectedPassword, result.Password))
+                {
+                    return result;
+                }
+
+                result.Role = UserRole.Admin;
+                _logger.LogInformation("Assigned role 'user.Admin' to personal data with Id: {Id}", result.Id);
+
+                await UpdateAction(result, tr, token);
+
+                return result;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error occurred while creating personal data for Id: {Id}", model.Id);
+                throw;
+            }
+        }, transaction, cancellationToken);
     }
 
     public override async Task<PersonalDataModel> Delete(
