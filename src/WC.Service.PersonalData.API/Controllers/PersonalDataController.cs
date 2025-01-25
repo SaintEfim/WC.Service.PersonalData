@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
 using NSwag.Annotations;
@@ -14,6 +15,7 @@ namespace WC.Service.PersonalData.API.Controllers;
 /// <summary>
 ///     The personal data management controller.
 /// </summary>
+[Authorize(Roles = "Admin")]
 [Route("api/v1/personal-data")]
 public class PersonalDataController
     : CrudApiControllerBase<PersonalDataController, IPersonalDataManager, IPersonalDataProvider, PersonalDataModel,
