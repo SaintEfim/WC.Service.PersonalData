@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
+using Sieve.Services;
 using WC.Service.PersonalData.Data.PostgreSql.Context;
 using WC.Service.PersonalData.Data.Repositories;
 
@@ -8,8 +9,9 @@ public class PersonalDataRepository : PersonalDataRepository<PersonalDataDbConte
 {
     public PersonalDataRepository(
         PersonalDataDbContext context,
-        ILogger<PersonalDataRepository> logger)
-        : base(context, logger)
+        ILogger<PersonalDataRepository> logger,
+        ISieveProcessor serviceProvider)
+        : base(context, logger, serviceProvider)
     {
     }
 }

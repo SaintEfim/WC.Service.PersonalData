@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
+using Sieve.Services;
 using WC.Library.Data.Repository;
 using WC.Service.PersonalData.Data.Models;
 
@@ -12,8 +13,9 @@ public class PersonalDataRepository<TDbContext>
 {
     protected PersonalDataRepository(
         TDbContext context,
-        ILogger<PersonalDataRepository<TDbContext>> logger)
-        : base(context, logger)
+        ILogger<PersonalDataRepository<TDbContext>> logger,
+        ISieveProcessor sieveProcessor)
+        : base(context, logger, sieveProcessor)
     {
     }
 }
