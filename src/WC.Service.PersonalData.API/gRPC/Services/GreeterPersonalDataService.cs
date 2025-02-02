@@ -166,4 +166,28 @@ public class GreeterPersonalDataService : GreeterPersonalData.GreeterPersonalDat
             throw new RpcException(new Status(StatusCode.Internal, $"{ex.Message}"));
         }
     }
+
+    public override async Task<GetEmailEmployeeResponse?> GetEmailEmployee(
+        GetEmailEmployeeRequest request,
+        ServerCallContext context)
+    {
+        try
+        {
+            var emailEmployee = await _provider.GetEmailEmployee(Guid.Parse(request.EmployeeId), cancellationToken: context.CancellationToken);
+
+            if (emailEmployee == null)
+            {
+                return null;
+            }
+
+            return new GetEmailEmployeeResponse
+            {
+                Email = emailEmployee.Email
+            };
+        }
+        catch (Exception ex)
+        {
+            throw new RpcException(new Status(StatusCode.Internal, $"{ex.Message}"));
+        }
+    }
 }

@@ -10,4 +10,9 @@ public interface IPersonalDataProvider : IDataProvider<PersonalDataModel>
         PersonalDataModel model,
         IWcTransaction? transaction = default,
         CancellationToken cancellationToken = default);
+
+    Task<PersonalDataModel?> GetEmailEmployee(
+        Guid employeeId,
+        IWcTransaction? transaction = default,
+        CancellationToken cancellationToken = default);
 }

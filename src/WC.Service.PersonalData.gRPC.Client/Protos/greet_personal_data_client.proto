@@ -11,6 +11,7 @@ service GreeterPersonalData {
   rpc ResetPassword (PersonalDataResetPasswordRequest) returns (google.protobuf.Empty);
   rpc Delete (PersonalDataDeleteRequest) returns (google.protobuf.Empty);
   rpc VerifyCredentials (VerifyCredentialsRequest) returns (VerifyCredentialsResponse);
+  rpc GetEmailEmployee (GetEmailEmployeeRequest) returns (GetEmailEmployeeResponse);
 }
 
 message PersonalDataCreateRequest {
@@ -40,4 +41,12 @@ message VerifyCredentialsRequest {
 message VerifyCredentialsResponse {
   string employeeId = 1;
   string role = 5;
+}
+
+message GetEmailEmployeeRequest {
+  string employeeId = 1;
+}
+
+message GetEmailEmployeeResponse {
+  string email = 1;
 }

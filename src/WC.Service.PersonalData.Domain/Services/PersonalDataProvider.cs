@@ -62,4 +62,12 @@ public class PersonalDataProvider
             throw;
         }
     }
+
+    public Task<PersonalDataModel?> GetEmailEmployee(
+        Guid employeeId,
+        IWcTransaction? transaction = default,
+        CancellationToken cancellationToken = default)
+    {
+        throw new NotImplementedException();
+    }
 }

@@ -1,6 +1,7 @@
 ﻿using Grpc.Net.Client;
 using WC.Service.PersonalData.gRPC.Client.Models;
 using WC.Service.PersonalData.gRPC.Client.Models.Create;
+using WC.Service.PersonalData.gRPC.Client.Models.GetEmailEmployee;
 using WC.Service.PersonalData.gRPC.Client.Models.Verify;
 
 namespace WC.Service.PersonalData.gRPC.Client.Clients;
@@ -65,5 +66,16 @@ public class GreeterPersonalDataClient : IGreeterPersonalDataClient
             EmployeeId = Guid.Parse(verifyResult.EmployeeId),
             Role = verifyResult.Role
         };
+    }
+
+    public async Task<GetEmailEmployeeResponseModel> GetEmailEmployee(
+        GetEmailEmployeeRequestModel request,
+        CancellationToken cancellationToken = default)
+    {
+        var emailEmployee = await _client.GetEmailEmployeeAsync(
+            new GetEmailEmployeeRequest { EmployeeId = request.EmployeeId.ToString() },
+            cancellationToken: cancellationToken);
+
+        return new GetEmailEmployeeResponseModel { Email = emailEmployee.Email };
     }
 }
