@@ -40,7 +40,8 @@ public class PersonalDataProvider
             var personalDataEntities =
                 await Repository.Get(transaction: transaction, cancellationToken: cancellationToken);
             var personalData = personalDataEntities.SingleOrDefault(x =>
-                _passwordHasher.Verify(model.Password, x.Password) && x.Email.Equals(model.Email, StringComparison.CurrentCultureIgnoreCase));
+                _passwordHasher.Verify(model.Password, x.Password) &&
+                x.Email.Equals(model.Email, StringComparison.CurrentCultureIgnoreCase));
 
             if (personalData == null)
             {
@@ -63,11 +64,15 @@ public class PersonalDataProvider
         }
     }
 
-    public Task<PersonalDataModel?> GetEmailEmployee(
+    public async Task<PersonalDataModel?> GetEmailEmployee(
         Guid employeeId,
         IWcTransaction? transaction = default,
         CancellationToken cancellationToken = default)
     {
-        throw new NotImplementedException();
+        var emailEmployee =
+            (await Repository.Get(transaction: transaction, cancellationToken: cancellationToken)).FirstOrDefault(x =>
+                x.EmployeeId == employeeId);
+
+        return Mapper.Map<PersonalDataModel>(emailEmployee);
     }
 }
