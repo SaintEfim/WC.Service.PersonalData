@@ -43,7 +43,7 @@ public class PersonalDataController
     [OpenApiOperation(nameof(PersonalDataGet))]
     [SwaggerResponse(Status200OK, typeof(List<PersonalDataDto>))]
     public async Task<ActionResult<List<PersonalDataDto>>> PersonalDataGet(
-        [FromQuery] SieveModel? filter = default,
+        [FromQuery] SieveModel filter,
         bool withIncludes = false,
         CancellationToken cancellationToken = default)
     {

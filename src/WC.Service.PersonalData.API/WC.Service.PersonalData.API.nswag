@@ -13,7 +13,7 @@
       "msBuildOutputPath": null,
       "verbose": true,
       "workingDirectory": null,
-      "aspNetCoreEnvironment": "Development",
+      "aspNetCoreEnvironment": "$(AspNetCoreEnvironment)",
       "output": "WC.Service.PersonalData.API.swagger.json",
       "newLineBehavior": "Auto"
     }
