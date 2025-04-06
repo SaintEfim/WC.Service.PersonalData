@@ -2,7 +2,7 @@
 using WC.Service.PersonalData.Data.Repositories;
 using WC.Service.PersonalData.Domain.Models;
 
-namespace WC.Service.PersonalData.Domain.Services.Validators.Create;
+namespace WC.Service.PersonalData.Domain.Services.PersonalData.Validators.Create;
 
 public sealed class PersonalDataCreateDbValidator : AbstractValidator<PersonalDataModel>
 {

@@ -3,7 +3,7 @@ using WC.Service.EmailDomains.gRPC.Client.Clients;
 using WC.Service.EmailDomains.gRPC.Client.Models.DoesEmailDomainExist;
 using WC.Service.PersonalData.Domain.Models;
 
-namespace WC.Service.PersonalData.Domain.Services.Validators;
+namespace WC.Service.PersonalData.Domain.Services.PersonalData.Validators;
 
 public sealed class PersonalDataCheckEmailDomainValidator : AbstractValidator<PersonalDataModel>
 {

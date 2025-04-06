@@ -1,0 +1,3 @@
+[*]
+#line breaks
+csharp_wrap_arguments_style = chop_always

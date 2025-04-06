@@ -2,7 +2,7 @@
 using WC.Library.Employee.Shared.Validators;
 using WC.Service.PersonalData.Domain.Models;
 
-namespace WC.Service.PersonalData.Domain.Services.Validators;
+namespace WC.Service.PersonalData.Domain.Services.PersonalData.Validators;
 
 public sealed class PersonalDataModelValidator : AbstractValidator<PersonalDataModel>
 {
@@ -18,5 +18,8 @@ public sealed class PersonalDataModelValidator : AbstractValidator<PersonalDataM
         RuleFor(x => x.Password)
             .NotNull()
             .SetValidator(new PasswordValidator(nameof(PersonalDataModel.Password)));
+
+        RuleFor(x => x.Role)
+            .IsInEnum();
     }
 }

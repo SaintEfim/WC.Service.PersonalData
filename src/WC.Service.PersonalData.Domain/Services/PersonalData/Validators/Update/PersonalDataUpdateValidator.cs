@@ -3,7 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 using WC.Library.Domain.Validators;
 using WC.Service.PersonalData.Domain.Models;
 
-namespace WC.Service.PersonalData.Domain.Services.Validators.Update;
+namespace WC.Service.PersonalData.Domain.Services.PersonalData.Validators.Update;
 
 public sealed class PersonalDataUpdateValidator
     : AbstractValidator<PersonalDataModel>,
