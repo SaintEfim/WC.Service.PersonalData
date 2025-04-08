@@ -7,7 +7,7 @@ using WC.Service.PersonalData.Data.Models;
 using WC.Service.PersonalData.Data.Repositories;
 using WC.Service.PersonalData.Domain.Models;
 
-namespace WC.Service.PersonalData.Domain.Services;
+namespace WC.Service.PersonalData.Domain.Services.PersonalData;
 
 public class PersonalDataProvider
     : DataProviderBase<PersonalDataProvider, IPersonalDataRepository, PersonalDataModel, PersonalDataEntity>,
