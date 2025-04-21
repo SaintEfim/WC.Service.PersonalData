@@ -14,7 +14,7 @@
       "verbose": true,
       "workingDirectory": null,
       "aspNetCoreEnvironment": "$(AspNetCoreEnvironment)",
-      "output": "WC.Service.PersonalData.API.swagger.json",
+      "output": "WC.Service.PersonalData.API.swagger.yaml",
       "newLineBehavior": "Auto"
     }
   },
